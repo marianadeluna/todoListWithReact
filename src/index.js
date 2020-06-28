@@ -1,12 +1,13 @@
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Typography from '@material-ui/core/Typography';
-import './styles.css';
 import TodoForm from "./TodoForm";
 import TodoList from './TodoList';
-import React, { useState } from 'react';
+import useTodoState from './useTodoState';
+import './styles.css';
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+    const { todos, addTodo, deleteTodo } = useTodoState([]);
 
   return (
     <div className="App">
@@ -17,15 +18,12 @@ const App = () => {
           <TodoForm saveTodo={(todoText) => {
               const trimmedText = todoText.trim();
               if (trimmedText.length > 0) {
-                  setTodos([...todos, trimmedText]);
+                  addTodo(trimmedText);
               }
           }} />
           <TodoList
               todos={todos}
-              deleteTodo={(todoIndex) => {
-                  const newTodos = todos.filter((_, index) => index !== todoIndex);
-                  setTodos(newTodos);
-              }}
+              deleteTodo={deleteTodo}
           />
     </div>
   );

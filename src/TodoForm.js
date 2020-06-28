@@ -1,17 +1,19 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useState } from 'react'; // function that takes initial state and returns array
+import useInputState from './useInputState';
+
 
 const TodoForm = ({ saveTodo }) => {
-	const [value, setValue] = useState('');
+	const { value, reset, onChange } = useInputState('');
 
 	return (
-		<form onSubmit={(event) => { event.preventDefault(); saveTodo(value); setValue(''); }} >
+		<form onSubmit={(event) => { event.preventDefault(); saveTodo(value); reset(); }} >
 			<TextField
 				varient="outlined"
 				margin="normal"
 				placeholder="Add To Do"
-				onChange={(event) => { setValue(event.target.value) }}
+				onChange={onChange}
 				value={value} 
 			/>
 		</form>
