@@ -8,7 +8,7 @@ export default (initialValue) => {
             setTodos([...todos, todoText]);
         },
         deleteTodo: (todoIndex) => {
-            const newTodos = todos.filter((_, index) => index != todosIndex);
+            const newTodos = todos.filter((_, index) => index != todoIndex);
             setTodos(newTodos);
         }
     };
